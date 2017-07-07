@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<body>
+<style>
+.container {
+  float: left;
+}
+</style>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://benschmidt.org/colorbar/colorbar.js"></script>
+<svg id="calid" ></svg>
+<svg class="plotid" width="960" height="500" float="right"></svg>
+<svg class="colorbarSVG" width="960" height="500" float="right"></svg>
+<!-- <button id="start" onclick="updateData()">Transition</button> -->
+<!-- <button id="colorize" onclick="colorize()">Colorize</button> -->
+<div>
+<input type="radio" name="radiosearch" onclick="colorize(0)" checked/> Accumulated rain
+</div>
+<div>
+<input type="radio" name="radiosearch" onclick="colorize(10)"/> 10 min aggregate
+</div>
+<div>
+<input type="radio" name="radiosearch" onclick="colorize(30)"/> 30 min aggregate
+</div>
+<div>
+<input type="radio" name="radiosearch" onclick="colorize(60)"/> 60 min aggregate
+</div>
+<div>
+<input type="radio" name="radiosearch" onclick="colorize(120)"/> 120 min aggregate
+</div>
+<!-- <p id="svgid" ></p> -->
+<!-- <script> -->
+<!-- d3.select("#svgid").html("I'm classy"); -->
+<!-- </script> -->
+<script src="CalendarChart.js"></script>
+<script src="RainChart.js"></script>
+<script>
+function updateData() {
+<!-- console.log(d3) -->
+<!-- drawplotid("1990-02-28 19:27:59","1990-02-30 19:27:59"); -->
+var y = d3.scaleLinear()
+    .rangeRound([height, 0])
+	.domain([0, 10]);
+var svge = d3.select(".plotid");
+<!-- console.log(svge.select("g").call(d3.axisLeft)); -->
+<!-- svge.call(d3.axisLeft(y)); -->
+svge.transition().duration(1500).call(d3.axisLeft(y));  
+<!-- svge.select("y") // change the y axis -->
+            <!-- .duration(750) -->
+            <!-- .call(y);  -->
+<!-- console.log(d3.select(".plotid")); -->
+<!-- d3.select(".plotid").select("y").attr('domain',[0,30]).transition(); -->
+}
+function colorize(min) {
+d3.csv("RainStats.csv", function(error, csv) {
+  if (error) throw error;
+  var data = d3.nest()
+      .key(function(d) { return d.Date; })
+      .rollup(function(d) { return (eval("d[0]."+"agg"+min) )})
+    .object(csv);
+	
+	var color = d3.scaleQuantize()
+	.domain([0.1, d3.max(d3.values(data).map(function(d) { return parseFloat(d); }))])
+	.range(["#FFFFFF", "#E7E5F7", "#D0CCEF", "#B9B3E7", "#A199DF", "#8A80D8", "#7367D0", "#5B4DC8", "#4434C0", "#2D1BB8", "#1602B1"]);
+  rect.filter(function(d) { return d in data; })
+      .attr("fill", function(d) { return color(data[d]); })
+	  .on("click", function(d){
+		  drawplotid(parseTimeInput(d),d3.timeDay.offset(parseTimeInput(d),1));
+		  console.log(d);})
+    .append("title")
+      .text(function(d) { return d + ": " + (data[d]); });
+  <!-- colorbar = Colorbar() -->
+	<!-- .origin([15,60]) -->
+	<!-- .scale(color) -->
+	<!-- .orient("Horizontal"); -->
+	var cleg = d3.legend.color()
+        .labelFormat(d3.format(".0f"))
+        .scale(colorScale)
+        .shapePadding(5)
+        .shapeWidth(50)
+        .shapeHeight(20)
+        .labelOffset(12);
+
+colorbarObject = d3.select(".colorbarSVG")
+    .call(cleg);
+});
+}
+
+</script>
