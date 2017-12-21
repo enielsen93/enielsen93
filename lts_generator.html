@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Emil Nielsen</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="">
+<meta name="description" content="">
+<link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./css/main.css">
+<link rel="icon" type="image/vnd.microsoft.icon"
+     href="favicon.ico" />
+<meta name="og:description" content="">
+<meta name="og:title" content="Emil Nielsen">
+<meta name="og:type" content="article">
+</head>
+<body>
+<div class="wrapper">
+<div class="navbar container">
+<a id="author-name" class="alignable pull-left">Emil Nielsen</a>
+</div>
+<div style="clear:both"></div>
+<hr>
+<div class="container content">
+<h2 id="about-me">Long Term Statistics - ArcGIS Toolbox</h2>
+<p>Long Term Statistics toolbox er et værktøj til at udvikle DHI MIKE Urban LTS-filer (Long Term Statistics) igennem ArcGIS.</p>
+<p>Værktøjet virker til alle versioner af ArcGIS og kan anvende både .dfs0-filer fra MIKE Urban eller .km2-filer fra Spildevandskomitéens regnmålersystem. Den kan skrive LTS-filer til direkte anvendelse i langtidssimuleringer igennem MIKE Urban eller .csv-filer.</p>
+<img src="LTS/INPUT-OUTPUT.svg"/>
+<p><strong>Hvorfor vælge værktøjet i stedet for modulet indbygget i MIKE Urban?:</strong></p>
+Værktøjet tilbyder en bedre og mere intuitiv udvælgelse af regnhændelser til anvendelse i langtidssimuleringer. Værktøjet tilbyder bl.a. følgende funktioner til udvælgelse af regnhændelser:
+<ol>
+<li>Kort beregningstid (< 5 sekunder) uden behov for simulering af afstrømning for systemet før udvælgelse.</li>
+<li>Inkludering af regnhændelser med samlet nedbørsmængde (i mm) over en given værdi.</li>
+<li>Inkludering af regnhændelser med gentagelsesperiode for samlet nedbørsmængde (i år) over en given værdi.</li>
+<li>Start- og stop-tid for regnhændelsen, så langtidssimuleringen kan simulere nedbør lige før og lige efter regnhændelsen.</li>
+<li>Inkludering af regnhændelser med en nedbørsmængde (mm) over et givent interval (minutter)</li>
+</ol>
+Brugerinterfacet for programmet kan ses nedenunder.
+<img src="LTS/Interface.png"/>
+<p><strong>Hvordan bruges værktøjet?:</strong></p>
+<p>Værktøjet kan hentes gratis nederst på siden. Efter udpakning kan Long Term Statistics.pyt hentes ind i ArcGIS Toolbox, hvorved interfacet som ses ovenover kan benyttes.</p>
+
+<p>Download <u><a href="LTS/Long Term Statistics.zip" target="_blank">Long Term Statistics.pyt</a></u> her.</p>
+</div>
+</div>
+</body>
+
