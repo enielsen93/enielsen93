@@ -100,8 +100,8 @@ def readDFS0(filename,scriptFolder):
 	dfs0File.Close();
 	ddlist = np.array(list(dd))
 	gaugetime = ddlist[range(0,len(ddlist),2)]
-	startdate = datetime.datetime(dfs0File.FileInfo.TimeAxis.StartDateTime.Year,dfs0File.FileInfo.TimeAxis.StartDateTime.Month,dfs0File.FileInfo.TimeAxis.StartDateTime.Day,dfs0File.FileInfo.TimeAxis.StartDateTime.Hour,dfs0File.FileInfo.TimeAxis.StartDateTime.Second)
-#	toSecFactor = DHI.Generic.MikeZero.eumUtil.ConvertToBase(dfs0File.FileInfo.TimeAxis.TimeUnit,1.0)
+	startdate = datetime.datetime(dfs0File.FileInfo.TimeAxis.StartDateTime.Year,dfs0File.FileInfo.TimeAxis.StartDateTime.Month,dfs0File.FileInfo.TimeAxis.StartDateTime.Day,
+							   dfs0File.FileInfo.TimeAxis.StartDateTime.Hour,dfs0File.FileInfo.TimeAxis.StartDateTime.Second)
 	gaugetime = dates.date2num(startdate) + gaugetime/60/60/24
 	toMicroMeterPerSecondFactor = DHI.Generic.MikeZero.eumUtil.ConvertToBase(dfs0File.ItemInfo.__getitem__(0).Quantity.Unit,1.0)*1e6
 	gaugeint = ddlist[range(1,len(ddlist),2)]*toMicroMeterPerSecondFactor
@@ -216,7 +216,7 @@ def writeLTS(parameters,scriptFolder):
 			gaugetime,gaugeint = readDFS0(parametersDict["input_file"],scriptFolder)
 		else:
 			gaugetime,gaugeint = readKM2(parametersDict["input_file"])
-		
+
 		if strtobool(parametersDict["dfs0_output_enable"])==True:
 			logFile.write(str(dtnow.now())+": Writing DFS0 file\n")
 			writeDFS0(gaugetime,gaugeint,parametersDict["dfs_output"],scriptFolder)
@@ -256,6 +256,7 @@ def writeLTS(parameters,scriptFolder):
 				# Loop over all time aggregate periods
 				for i, dt in enumerate(dts):
 					# Calculate total rain depth over aggregate period
+					dt = int(dt)
 					mm = np.sum(gaugeint[j:j+bisect.bisect_left((tminutes[j:j+dt]-tminutes[j]),dt)])/1000*60
 					if (mm>RDAgg[eventidx,i]):
 						RDAgg[eventidx,i] = mm
@@ -444,7 +445,7 @@ def writeLTS(parameters,scriptFolder):
 		fout.close()
 		
 		# Create csv-file with LTS events
-		if False:
+		if True == False:
                     logFile.write(str(dtnow.now())+": Creating csv-file with LTS-events\n")
                     csvDict = OrderedDict()
                     csvDict["Simulation start"] = eventstarttimeStr
