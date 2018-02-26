@@ -229,7 +229,7 @@ def writeLTS(parameters,scriptFolder):
 		if strtobool(parametersDict["time_aggregate_enable"]) == False:
 			dts = [5]
 		elif parametersDict["rain_event_merge"]:
-			dts = float(parametersDict["rain_event_merge_duration"])
+			dts = [float(parametersDict["rain_event_merge_duration"])]
 		else:
 			dts = map(int,parametersDict["time_aggregate_periods"].split(';'))#[1, 5, 10, 30, 60, 180, 360]		
 	

@@ -228,6 +228,8 @@ class LTSGenerator(object):
 			parameters[13].enabled = False
 		if parameters[14].value == True:
 			parameters[15].enabled = True
+		else: 
+			parameters[15].enabled = False
 			return
 
     def updateMessages(self, parameters):
