@@ -352,7 +352,7 @@ def writeLTS(parameters,scriptFolder):
 					eventstoptimeStr.append(eventstoptime.strftime('%Y-%m-%d %H:%M:00'))
 					eventdts.append(['total event'])
 					# Calculate the duration of the event
-					dur = (eventstoptime-eventstarttime).seconds
+					dur = (dates.date2num(eventstoptime)-dates.date2num(eventstarttime))*24*3600
 					durTotal += float(dur)/3600
 					durHour.append(float(dur)/3600)
 					rpevent.append(rpconfint[eventidx])
@@ -385,7 +385,7 @@ def writeLTS(parameters,scriptFolder):
 						eventstoptimeStr.append(eventstoptime.strftime('%Y-%m-%d %H:%M:00'))
 						eventdts.append(["%d min" % (dts[i])])
 						# Calculate the duration of the event
-						dur = (eventstoptime-eventstarttime).seconds
+						dur = (dates.date2num(eventstoptime)-dates.date2num(eventstarttime))*24*3600
 						durTotal += float(dur)/3600
 						durHour.append(float(dur)/3600)
 						rpevent.append([])
@@ -415,7 +415,9 @@ def writeLTS(parameters,scriptFolder):
 			_,dur_hour = divmod(remainder,60)
 			dur_hour = int(dur_hour)
 			if dur_day > 0:
-				dur_time_str.append("%1.0d days, %1.0d hours" % (dur_day,dur_hour))
+				dur_time_str.append("%d days, %d hours" % (dur_day,dur_hour))
+			else:
+				dur_time_str.append("%d hours" % (dur_hour))
 		
 		# Sort rain events by start time
 		zipped = zip(eventstarttimeStr, eventstoptimeStr, durHour, accrain, eventdts, rpevent, rpeventmedian, dur_time_str)
@@ -441,18 +443,20 @@ def writeLTS(parameters,scriptFolder):
 						  dataperiod=dataperiodStr,accumulated_rain=accrain,eventdts = eventdts,rpevent=rpevent,rpeventmedian=rpeventmedian,alpha=100-alpha*100,date_criteria=parametersDict["date_criteria"]))
 		fout.close()
 		
-		# Create csv-file with LTS events		
-		logFile.write(str(dtnow.now())+": Creating csv-file with LTS-events\n")
-		csvDict = OrderedDict()
-		csvDict["Simulation start"] = eventstarttimeStr
-		csvDict["Simulation stop"] = eventstoptimeStr
-		csvDict["Accumulated rain [mm]"] = accrain
-		with open('LTSJobList.csv', 'w') as csvfile:
-			csvfile.write("Job")
-			[csvfile.write(',{0}'.format(key)) for key, _ in csvDict.items()]
-			for i in range(0,len(csvDict["Simulation start"])):
-				csvfile.write("\n{0}".format(i+1))
-				[csvfile.write(',{0}'.format(value[i])) for _, value in csvDict.items()]
+		# Create csv-file with LTS events
+		if False:
+                    logFile.write(str(dtnow.now())+": Creating csv-file with LTS-events\n")
+                    csvDict = OrderedDict()
+                    csvDict["Simulation start"] = eventstarttimeStr
+                    csvDict["Simulation stop"] = eventstoptimeStr
+                    csvDict["Accumulated rain [mm]"] = accrain
+                    with open('LTSJobList.csv', 'w') as csvfile:
+                            csvfile.write("Job")
+                            [csvfile.write(',{0}'.format(key)) for key, _ in csvDict.items()]
+                            for i in range(0,len(csvDict["Simulation start"])):
+                                    csvfile.write("\n{0}".format(i+1))
+                                    [csvfile.write(',{0}'.format(value[i])) for _, value in csvDict.items()]
+				
 		logFile.write(str(dtnow.now())+": Succesful run\n")
 		logFile.close()
 		local_vars = inspect.currentframe().f_locals
