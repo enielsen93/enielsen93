@@ -388,7 +388,7 @@ def writeLTS(parameters,scriptFolder):
 						# Calculate the duration of the event
 						dur = (eventstoptime-eventstarttime).seconds
 						durTotal += float(dur)/3600
-						durHour.append("%d" % (dur/3600))
+						durHour.append(float(dur)/3600)
 						rpevent.append([])
 						rpeventmedian.append([])
 						
@@ -409,10 +409,19 @@ def writeLTS(parameters,scriptFolder):
 		dataperiodMonths = int(remainder/365*12)
 		dataperiodStr = "%d years, %d months" % (dataperiodYears,dataperiodMonths)
 		
+		dur_time_str = []
+		for dur in durHour:
+			dur_day,remainder = divmod(durHour,24)
+			dur_day = int(dur_day)
+			_,dur_hour = divmod(remainder,60)
+			dur_hour = int(dur_hour)
+			if dur_day > 0:
+				dur_time_str.append("%1.0d days, %1.0d hours" % (dur_day,dur_hour))
+		
 		# Sort rain events by start time
-		zipped = zip(eventstarttimeStr, eventstoptimeStr, durHour, accrain, eventdts, rpevent, rpeventmedian)
+		zipped = zip(eventstarttimeStr, eventstoptimeStr, durHour, accrain, eventdts, rpevent, rpeventmedian, dur_time_str)
 		zipped.sort()
-		eventstarttimeStr, eventstoptimeStr, durHour, accrain, eventdts, rpevent, rpeventmedian = zip(*zipped)
+		eventstarttimeStr, eventstoptimeStr, durHour, accrain, eventdts, rpevent, rpeventmedian, dur_time_str = zip(*zipped)
 		
 		#####
 		# Write LTS file through jinga2 module
@@ -429,7 +438,7 @@ def writeLTS(parameters,scriptFolder):
 		# Write LTS file with event information vectors
 		fout = open(parametersDict["output_mjl"],'w+')
 		fout.write(Environment().from_string(templateFileStr).render(inputfile=parametersDict["input_file"],eventlist=eventlist,simulation_start=eventstarttimeStr,simulation_stop=eventstoptimeStr,
-						  job_number=range(1,len(eventstarttimeStr)+1),dur_time=durHour,jobs=len(eventstarttimeStr),total_dur_time=durTotalStr,
+						  job_number=range(1,len(eventstarttimeStr)+1),dur_time=dur_time_str,jobs=len(eventstarttimeStr),total_dur_time=durTotalStr,
 						  dataperiod=dataperiodStr,accumulated_rain=accrain,eventdts = eventdts,rpevent=rpevent,rpeventmedian=rpeventmedian,alpha=100-alpha*100,date_criteria=parametersDict["date_criteria"]))
 		fout.close()
 		

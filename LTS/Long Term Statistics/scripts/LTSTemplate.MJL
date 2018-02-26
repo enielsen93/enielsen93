@@ -22,7 +22,7 @@
       Simulation_end = '{{simulation_stop[loop.index0]}}'
 
     // Job                                                          :    {{job_number[loop.index0]}}
-    // Duration                                                     :    {{dur_time[loop.index0]}}h
+    // Duration                                                     :    {{dur_time_str[loop.index0]}}
     // Total rain depth                                             :    {{accumulated_rain[loop.index0]}} mm
     // Time aggregate periods selected by                           :    {% for dt in eventdts[loop.index0] %}{{dt}}; {% endfor %} {% if not rpevent[loop.index0]==[] %} 
     // Return period                                                :    {% if rpeventmedian[loop.index0]>1 %}{{rpeventmedian[loop.index0]|round(1)}} years{% else %}{{(rpeventmedian[loop.index0]*12)|round(1)}} months{% endif %}
