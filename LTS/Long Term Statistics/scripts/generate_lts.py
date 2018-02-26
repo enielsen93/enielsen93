@@ -411,7 +411,7 @@ def writeLTS(parameters,scriptFolder):
 		
 		dur_time_str = []
 		for dur in durHour:
-			dur_day,remainder = divmod(durHour,24)
+			dur_day,remainder = divmod(dur,24)
 			dur_day = int(dur_day)
 			_,dur_hour = divmod(remainder,60)
 			dur_hour = int(dur_hour)
