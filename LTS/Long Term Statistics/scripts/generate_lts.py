@@ -354,8 +354,7 @@ def writeLTS(parameters,scriptFolder):
 					# Calculate the duration of the event
 					dur = (eventstoptime-eventstarttime).seconds
 					durTotal += float(dur)/3600
-					durHour.append("%d" % (dur/3600))
-					print durHour
+					durHour.append(float(dur)/3600)
 					rpevent.append(rpconfint[eventidx])
 					rpeventmedian.append(rpmedian[eventidx])
 					
