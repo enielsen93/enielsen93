@@ -79,8 +79,8 @@ def readKM2(filename):
 		elif not eventrejected:
 			ints = map(float,gaugeintRE.findall(line))
 			# Exclude the first measurement
-			if eventfirstline == 1:
-				ints = [0] + ints[1:]
+			#if eventfirstline == 1:
+				#ints = [0] + ints[1:]
 			gaugeint.extend(ints)
 			gaugetime.extend((np.arange(0,len(ints),dtype=float)+timedelay)/60/24+eventstarttime[-1])
 			timedelay += len(ints)
