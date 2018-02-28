@@ -101,7 +101,7 @@ def readDFS0(filename,scriptFolder):
 	ddlist = np.array(list(dd))
 	gaugetime = ddlist[range(0,len(ddlist),2)]
 	startdate = datetime.datetime(dfs0File.FileInfo.TimeAxis.StartDateTime.Year,dfs0File.FileInfo.TimeAxis.StartDateTime.Month,dfs0File.FileInfo.TimeAxis.StartDateTime.Day,
-							   dfs0File.FileInfo.TimeAxis.StartDateTime.Hour,dfs0File.FileInfo.TimeAxis.StartDateTime.Second)
+							   dfs0File.FileInfo.TimeAxis.StartDateTime.Hour,dfs0File.FileInfo.TimeAxis.StartDateTime.Minute)
 	gaugetime = dates.date2num(startdate) + gaugetime/60/60/24
 	toMicroMeterPerSecondFactor = DHI.Generic.MikeZero.eumUtil.ConvertToBase(dfs0File.ItemInfo.__getitem__(0).Quantity.Unit,1.0)*1e6
 	gaugeint = ddlist[range(1,len(ddlist),2)]*toMicroMeterPerSecondFactor
