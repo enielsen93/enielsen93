@@ -226,9 +226,9 @@ def writeLTS(parameters,scriptFolder):
 	
 		logFile.write(str(dtnow.now())+": Initializing time aggregate periods\n")
 		# Time aggregates
-		if strtobool(parametersDict["time_aggregate_enable"]) == False:
+		if strtobool(parametersDict["time_aggregate_enable"]) == False and strtobool(parametersDict["rain_event_merge"]) == False:
 			dts = [5]
-		elif parametersDict["rain_event_merge"]:
+		elif strtobool(parametersDict["rain_event_merge"]):
 			dts = [float(parametersDict["rain_event_merge_duration"])]
 		else:
 			dts = map(int,parametersDict["time_aggregate_periods"].split(';'))#[1, 5, 10, 30, 60, 180, 360]		
