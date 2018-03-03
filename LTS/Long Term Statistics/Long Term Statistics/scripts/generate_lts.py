@@ -84,7 +84,7 @@ def readKM2(filename):
 			gaugeint.extend(ints)
 			gaugetime.extend((np.arange(0,len(ints),dtype=float)+timedelay)/60/24+eventstarttime[-1])
 			timedelay += len(ints)
-			eventfirstline = False
+#			eventfirstline = False
 	return np.asarray(gaugetime,dtype=float),np.asarray(gaugeint)
 
 # Function that reads DFS0 file
@@ -181,6 +181,7 @@ def writeLTS(parameters,scriptFolder):
 		logFile = open(os.path.join(scriptFolder.encode('ascii','ignore'),'log.txt'),'w')
 		# Read old config file and write new config file
 		if not __name__ == '__main__':
+			configStr = ''
 			parametersDict = {}
 			configWrite = ConfigParser.ConfigParser(allow_no_value=True)
 	#			configWrite.add_section("Tool Settings")
@@ -199,6 +200,7 @@ def writeLTS(parameters,scriptFolder):
 				else:
 					configWrite.set("ArcGIS input parameters","\r\n# " + par.displayName)
 				configWrite.set("ArcGIS input parameters",par.name,par.value)
+				configStr += r"// " + par.displayName + " = " + str(par.value) + "\n"
 			with open(scriptFolder + r"\config.ini", "wb") as config_file:
 				configWrite.write(config_file)
 		else:
@@ -226,12 +228,18 @@ def writeLTS(parameters,scriptFolder):
 	
 		logFile.write(str(dtnow.now())+": Initializing time aggregate periods\n")
 		# Time aggregates
-		if strtobool(parametersDict["time_aggregate_enable"]) == False and strtobool(parametersDict["rain_event_merge"]) == False:
-			dts = [5]
-		elif strtobool(parametersDict["rain_event_merge"]):
-			dts = [float(parametersDict["rain_event_merge_duration"])]
+		if strtobool(parametersDict["time_aggregate_enable"]):
+			dts = map(int,parametersDict["time_aggregate_periods"].split(';'))#[1, 5, 10, 30, 60, 180, 360]
 		else:
-			dts = map(int,parametersDict["time_aggregate_periods"].split(';'))#[1, 5, 10, 30, 60, 180, 360]		
+			dts = []
+		
+		mergePeriod = max(dts + [parametersDict["rain_event_merge_duration"]] + [5])
+#		if strtobool(parametersDict["time_aggregate_enable"]) == False and strtobool(parametersDict["rain_event_merge"]) == False:
+#			dts = [5]
+#		elif strtobool(parametersDict["rain_event_merge"]):
+#			dts = [float(parametersDict["rain_event_merge_duration"])]
+#		else:
+#			dts = map(int,parametersDict["time_aggregate_periods"].split(';'))#[1, 5, 10, 30, 60, 180, 360]		
 	
 		logFile.write(str(dtnow.now())+": Calculating rain depth over total event and time aggregate periods\n")
 		j = 0 # Time in time aggregate loop
@@ -243,7 +251,7 @@ def writeLTS(parameters,scriptFolder):
 		while j<np.size(tminutes)-1:
 			# End of each event is when there's a dry period of xxx minutes
 #			if not parametersDict["rain_event_merge"]:
-			jend = np.argmax(tdiff[j:]>max(max(dts),10))+j
+			jend = np.argmax(tdiff[j:]>mergePeriod)+j
 
 			# Initialize time aggregate set for this event
 			RDAgg = np.append(RDAgg,np.zeros((1,len(dts)+1),dtype=np.float),axis=0)
@@ -252,14 +260,15 @@ def writeLTS(parameters,scriptFolder):
 			# Calculate total rain depth for event
 			RDAgg[eventidx,-1] = np.sum(gaugeint[j:jend])/1000*60
 			# Loop over all intensities in event
-			for j in xrange(j,jend):
-				# Loop over all time aggregate periods
-				for i, dt in enumerate(dts):
-					# Calculate total rain depth over aggregate period
-					dt = int(dt)
-					mm = np.sum(gaugeint[j:j+bisect.bisect_left((tminutes[j:j+dt]-tminutes[j]),dt)])/1000*60
-					if (mm>RDAgg[eventidx,i]):
-						RDAgg[eventidx,i] = mm
+			if strtobool(parametersDict["time_aggregate_enable"]):
+				for j in xrange(j,jend):
+					# Loop over all time aggregate periods
+					for i, dt in enumerate(dts):
+						# Calculate total rain depth over aggregate period
+						dt = int(dt)
+						mm = np.sum(gaugeint[j:j+bisect.bisect_left((tminutes[j:j+dt]-tminutes[j]),dt)])/1000*60
+						if (mm>RDAgg[eventidx,i]):
+							RDAgg[eventidx,i] = mm
 			# End time of this event
 			endj = np.append(endj,np.int(jend))
 			j+=2
@@ -441,7 +450,8 @@ def writeLTS(parameters,scriptFolder):
 		fout = open(parametersDict["output_mjl"],'w+')
 		fout.write(Environment().from_string(templateFileStr).render(inputfile=parametersDict["input_file"],eventlist=eventlist,simulation_start=eventstarttimeStr,simulation_stop=eventstoptimeStr,
 						  job_number=range(1,len(eventstarttimeStr)+1),dur_time=dur_time_str,jobs=len(eventstarttimeStr),total_dur_time=durTotalStr,
-						  dataperiod=dataperiodStr,accumulated_rain=accrain,eventdts = eventdts,rpevent=rpevent,rpeventmedian=rpeventmedian,alpha=100-alpha*100,date_criteria=parametersDict["date_criteria"]))
+						  dataperiod=dataperiodStr,accumulated_rain=accrain,eventdts = eventdts,rpevent=rpevent,rpeventmedian=rpeventmedian,alpha=100-alpha*100,date_criteria=parametersDict["date_criteria"],
+						  configStr = configStr))
 		fout.close()
 		
 		# Create csv-file with LTS events
