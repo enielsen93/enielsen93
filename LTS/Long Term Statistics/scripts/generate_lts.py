@@ -233,7 +233,7 @@ def writeLTS(parameters,scriptFolder):
 		else:
 			dts = []
 		
-		mergePeriod = max(dts + float([parametersDict["rain_event_merge_duration"]]) + [5])
+		mergePeriod = max(dts + [float(parametersDict["rain_event_merge_duration"])] + [5])
 #		if strtobool(parametersDict["time_aggregate_enable"]) == False and strtobool(parametersDict["rain_event_merge"]) == False:
 #			dts = [5]
 #		elif strtobool(parametersDict["rain_event_merge"]):
