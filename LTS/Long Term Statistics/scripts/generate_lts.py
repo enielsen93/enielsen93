@@ -175,10 +175,10 @@ def bootstrap_resample(X, samples, n=None):
 
 # Main function that writes LTS files from rain series file
 def writeLTS(parameters,scriptFolder):
+	# Open log file
+	logFile = open(os.path.join(scriptFolder.encode('ascii','ignore'),'log.txt'),'w')
 	try:
-		global local_vars
-		# Open log file
-		logFile = open(os.path.join(scriptFolder.encode('ascii','ignore'),'log.txt'),'w')
+		global local_vars	
 		# Read old config file and write new config file
 		if not __name__ == '__main__':
 			configStr = ''
@@ -233,7 +233,7 @@ def writeLTS(parameters,scriptFolder):
 		else:
 			dts = []
 		
-		mergePeriod = max(dts + [parametersDict["rain_event_merge_duration"]] + [5])
+		mergePeriod = max(dts + float([parametersDict["rain_event_merge_duration"]]) + [5])
 #		if strtobool(parametersDict["time_aggregate_enable"]) == False and strtobool(parametersDict["rain_event_merge"]) == False:
 #			dts = [5]
 #		elif strtobool(parametersDict["rain_event_merge"]):
@@ -474,7 +474,8 @@ def writeLTS(parameters,scriptFolder):
 		# If error occurs, write log-file
 	except Exception as exc:
 		local_vars = inspect.currentframe().f_locals
-		logFile.write(str(exc))
+		logFile.write(str(exc) + "\n")
+		logFile.write('Error on line {}'.format(sys.exc_info()[-1].tb_lineno))
 		logFile.close()
 		raise(exc)
 	return
