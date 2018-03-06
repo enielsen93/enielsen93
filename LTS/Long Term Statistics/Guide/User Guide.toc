@@ -1,0 +1,24 @@
+\contentsline {section}{\numberline {1}Field descriptions}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Input DFS0 or KM2 file (Rain series)}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Output MOUSE Job list (MJL) file}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Duration of time series}{4}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Select only rain events between these two dates}{4}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Include all rain events with total rain depth above}{4}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Include all rain events with return period above}{4}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.7}Soft start time}{5}{subsection.1.7}
+\contentsline {subsection}{\numberline {1.8}Soft stop time}{5}{subsection.1.8}
+\contentsline {subsection}{\numberline {1.9}Merge rain events over dry periods}{5}{subsection.1.9}
+\contentsline {subsection}{\numberline {1.10}Merge rain events over dry periods}{5}{subsection.1.10}
+\contentsline {subsection}{\numberline {1.11}Use time aggregates}{6}{subsection.1.11}
+\contentsline {subsection}{\numberline {1.12}Return period above}{6}{subsection.1.12}
+\contentsline {subsection}{\numberline {1.13}Number of included events for each aggregate}{6}{subsection.1.13}
+\contentsline {subsection}{\numberline {1.14}Time aggregates}{7}{subsection.1.14}
+\contentsline {section}{\numberline {2}Importing a Group List for a New Assignment Score File}{8}{section.2}
+\contentsline {section}{\numberline {3}Computing Autorated Scores from Group Scores and Peer Ratings}{8}{section.3}
+\contentsline {subsection}{\numberline {3.1}Setting Options}{8}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Selecting Students from List}{9}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Searching Students by ID}{9}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Entering Scores and Ratings}{9}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Computing Autorated Scores}{9}{subsection.3.5}
+\contentsline {section}{\numberline {4}Opening Existing Assignment Score File}{10}{section.4}
+\contentsline {section}{\numberline {5}Exporting Data for Excel}{10}{section.5}
