@@ -204,6 +204,7 @@ def writeLTS(parameters,scriptFolder):
 			with open(scriptFolder + r"\config.ini", "wb") as config_file:
 				configWrite.write(config_file)
 		else:
+			configStr = ""
 			parametersDict = parameters
 		
 		# Write parameters to log file
@@ -312,7 +313,7 @@ def writeLTS(parameters,scriptFolder):
 				eventsSum = eventsSum + float(parametersDict["include_events_return_period"].split("+")[1])
 		else:
 			eventsSum = 0
-		
+		eventsSum = int(eventsSum)
 		# Parse date criteria as number
 		if parametersDict["date_criteria"] and not parametersDict["date_criteria"]=="0":
 			date_criteria = parametersDict["date_criteria"].split(' - ')
@@ -324,7 +325,7 @@ def writeLTS(parameters,scriptFolder):
 		
 		# Calculate 95% confidence interval for return period of rain event
 		logFile.write(str(dtnow.now())+": Bootstrapping and calculating 95% confidence interval for return period of rain event\n")
-		rd = RDAggSort[0:eventsSum*3,-1]
+		rd = RDAggSort[0:int(eventsSum)*3,-1]
 		rdbs = bootstrap_resample(rd,1000)
 		rps = (dataperiod/365)/np.flipud(np.arange(0,np.size(rdbs,axis=0))+1)
 		rdbs = np.sort(rdbs,axis=0)
@@ -434,6 +435,42 @@ def writeLTS(parameters,scriptFolder):
 		zipped.sort()
 		eventstarttimeStr, eventstoptimeStr, durHour, accrain, eventdts, rpevent, rpeventmedian, dur_time_str = zip(*zipped)
 		
+#		# Combine overlapping rain events
+#		eventstarttimeStr = list(eventstarttimeStr)
+#		eventstoptimeStr = list(eventstoptimeStr)
+#		accrain = list(accrain)
+#		eventdts = list(eventdts)
+#		rpevent = list(rpevent)
+#		ignoreEvents = np.zeros(len(eventstarttimeStr))
+#		rpeventmedian = list(rpeventmedian)
+#		dur_time_str = list(dur_time_str)
+#		durHour = list(durHour)
+#		for i in range(len(eventstarttimeStr)-1):
+#			if ignoreEvents[i]:
+#				del eventstarttimeStr[i]
+#				del eventstoptimeStr[i]
+#				del durHour[i]
+#				del accrain[i]
+#				del eventdts[i]
+#				del rpevent[i]
+#				del rpeventmedian[i]
+#				del dur_time_str[i]
+#			if i == len(eventstarttimeStr):
+#				break
+#			index = 1
+#			while not ignoreEvents[i] and not index+i > len(eventstarttimeStr) and datetime.datetime.strptime(eventstoptimeStr[i],"%Y-%m-%d %H:%M:00")>datetime.datetime.strptime(eventstarttimeStr[i+index],"%Y-%m-%d %H:%M:00"):
+#				eventstoptimeStr[i] = eventstoptimeStr[i+index]
+#				ignoreEvents[i+index] = 1
+#				accrain[i] = "%1.1f" % (float(accrain[i]) + float(accrain[i+index]))
+#				if rpevent[i] + rpevent[i+index]:
+#					rpevent[i] = np.max(rpevent[i] + rpevent[i+index] + [0])
+#				if rpeventmedian[i]+rpeventmedian[i+index]:
+#					rpeventmedian[i] = np.max(rpeventmedian[i]+rpeventmedian[i+index] + [0])
+#				dur_time_str[i] = "N/A"
+#				index += 1
+#		
+			
+		
 		#####
 		# Write LTS file through jinga2 module
 		# Jinga2 reads a text file and uses it as a template for creating LTS files
@@ -476,6 +513,7 @@ def writeLTS(parameters,scriptFolder):
 		local_vars = inspect.currentframe().f_locals
 		logFile.write(str(exc) + "\n")
 		logFile.write('Error on line {}'.format(sys.exc_info()[-1].tb_lineno))
+		print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno))
 		logFile.close()
 		raise(exc)
 	return
@@ -532,6 +570,6 @@ if __name__ == '__main__':
 		parametersDict[option] = config.get("ArcGIS input parameters",option)
 #
 #	scriptFolder = os.path.dirname(os.path.realpath(__file__))
-	scriptFolder = r"C:\Users\Eniel\Documents\Spyder\Long Term Statistics\scripts\\"
+	scriptFolder = r"C:\Users\Eniel\Documents\enielsen93\LTS\Long Term Statistics\scripts\\"
 #	# Write LTS using parameters from config file
 	writeLTS(parametersDict,scriptFolder)
