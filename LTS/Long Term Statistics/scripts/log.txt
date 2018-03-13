@@ -1,28 +1,28 @@
-2018-03-09 07:40:42.784000: Starting tool Create LTS-file using the following parameters:
+2018-03-10 13:54:14.974000: Starting tool Create LTS-file using the following parameters:
 soft_stop_time: 0
 time_aggregate_return_period: 0
 include_events_total_rain_depth: 0
 rain_event_merge: false
-output_mjl: C:\Users\Eniel\Documents\Spyder\BassinDimensionering2\Silkeborg_Vandvaerk.MJL
+output_mjl: C:\Users\Eniel\Documents\Spyder\BassinDimensionering2\Silkeborg_Vandvaerk_2880.MJL
 time_series_duration: 39.1
 input_file: C:\Users\Eniel\Documents\Spyder\BassinDimensionering2\Silkeborg_Vandvaerk.km2
 soft_start_time: 0
 dfs_output: 0
-time_aggregate_periods: 1440
+time_aggregate_periods: 2880
 rain_event_merge_duration: 60
 date_criteria: 01/01/1979 - 01/02/2018
 time_aggregate_enable: true
 include_events_return_period: 0
 dfs0_output_enable: false
-time_aggregate_number_events: 15
+time_aggregate_number_events: 5
 
-2018-03-09 07:40:42.784000: Reading input file
-2018-03-09 07:40:46.568000: Initializing time aggregate periods
-2018-03-09 07:40:46.569000: Calculating rain depth over total event and time aggregate periods
-2018-03-09 07:41:09.506000: Initializing time series duration
-2018-03-09 07:41:09.508000: Calculating total number of events for time aggregate and total rain depth
-2018-03-09 07:41:09.508000: Bootstrapping and calculating 95% confidence interval for return period of rain event
-2018-03-09 07:41:09.533000: Assembling selected events to LTS data set by total rain depth
-2018-03-09 07:41:09.533000: Assembling selected events to LTS data set by time aggregate
-2018-03-09 07:41:09.535000: Writing LTS file using Jinga2
-2018-03-09 07:41:09.580000: Succesful run
+2018-03-10 13:54:14.974000: Reading input file
+2018-03-10 13:54:18.927000: Initializing time aggregate periods
+2018-03-10 13:54:18.927000: Calculating rain depth over total event and time aggregate periods
+2018-03-10 13:54:45.916000: Initializing time series duration
+2018-03-10 13:54:45.917000: Calculating total number of events for time aggregate and total rain depth
+2018-03-10 13:54:45.918000: Bootstrapping and calculating 95% confidence interval for return period of rain event
+2018-03-10 13:54:45.944000: Assembling selected events to LTS data set by total rain depth
+2018-03-10 13:54:45.944000: Assembling selected events to LTS data set by time aggregate
+2018-03-10 13:54:45.945000: Writing LTS file using Jinga2
+2018-03-10 13:54:45.991000: Succesful run
