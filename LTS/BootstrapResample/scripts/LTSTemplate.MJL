@@ -1,0 +1,40 @@
+// Generated using LTSGenerator
+
+[MOUSE_JOB_LIST]
+   [INPUT_FILES]
+      UND_file = ''
+      ADP_file = ''
+      CRF_file = ''
+      HGF_file = ''
+      PRF_file = ''
+      DWF_file = ''
+      RTC_file = ''
+      TRP_file = ''
+      MTF_file = ''
+      ERS_file = ''
+      ERF_file = ''
+      RSF_file = ''
+      // Input_file = '{{inputfile}}'
+   EndSect  // INPUT_FILES
+{% for i in simulation_start %}
+      [SIMULATION_EVENT]
+      Simulation_start = '{{simulation_start[loop.index0]}}'
+      Simulation_end = '{{simulation_stop[loop.index0]}}'
+
+    // Job                                                          :    {{job_number[loop.index0]}}
+    // Duration                                                     :    {{dur_time[loop.index0]}}
+    // Total rain depth                                             :    {{accumulated_rain[loop.index0]}} mm
+    // Time aggregate periods selected by                           :    {% for dt in eventdts[loop.index0] %}{{dt}}; {% endfor %} {% if not rpevent[loop.index0]==[] %} 
+    // Return period                                                :    {% if rpeventmedian[loop.index0]>1 %}{{rpeventmedian[loop.index0]|round(1)}} years{% else %}{{(rpeventmedian[loop.index0]*12)|round(1)}} months{% endif %}
+    // Return period ({{alpha}}% confidence interval, bootstrapped) :    {% if rpevent[loop.index0]>1 %}{{rpevent[loop.index0]|round(1)}} years{% else %}{{(rpevent[loop.index0]*12)|round(1)}} months{% endif %}{% endif %}
+   EndSect  // SIMULATION_EVENT
+{% endfor %}
+
+   // Number of jobs                            :     {{jobs}}
+   // Total duration                            :     {{total_dur_time}}
+   // Total duration of time series             :     {{dataperiod}} {% if date_criteria %}{% if not date_criteria == "0"%}
+   // Events selected within these two dates    :     {{date_criteria}}{% endif %}{% endif %}
+
+EndSect  // MOUSE_JOB_LIST
+
+{{configStr}}

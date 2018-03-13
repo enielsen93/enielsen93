@@ -24,9 +24,7 @@
     // Job                                                          :    {{job_number[loop.index0]}}
     // Duration                                                     :    {{dur_time[loop.index0]}}
     // Total rain depth                                             :    {{accumulated_rain[loop.index0]}} mm
-    // Time aggregate periods selected by                           :    {% for dt in eventdts[loop.index0] %}{{dt}}; {% endfor %} {% if not rpevent[loop.index0]==[] %} 
-    // Return period                                                :    {% if rpeventmedian[loop.index0]>1 %}{{rpeventmedian[loop.index0]|round(1)}} years{% else %}{{(rpeventmedian[loop.index0]*12)|round(1)}} months{% endif %}
-    // Return period ({{alpha}}% confidence interval, bootstrapped) :    {% if rpevent[loop.index0]>1 %}{{rpevent[loop.index0]|round(1)}} years{% else %}{{(rpevent[loop.index0]*12)|round(1)}} months{% endif %}{% endif %}
+    // Time aggregate periods selected by                           :    {% for dt in eventdts[loop.index0] %}{{dt}}; {% endfor %}
    EndSect  // SIMULATION_EVENT
 {% endfor %}
 
