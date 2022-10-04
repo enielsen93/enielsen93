@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta name="google-site-verification" content="0MrRu2v9Z1quJ_zDqfFKW-lqIuUgtJ-jXC3Ma79mRbc" />
-<title>Emil Nielsen</title>
+<title>Toolbox for DHI MIKE Urban and +</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Emil Nielsen">
@@ -19,7 +19,7 @@
 <body>
 <div class="wrapper">
 <div class="navbar container">
-<a id="author-name" class="alignable pull-left">Emil Nielsen</a>
+<a id="author-name" class="alignable pull-left">Toolbox for DHI MIKE Urban and +</a>
 </div>
 <div style="clear:both"></div>
 <hr>
@@ -55,7 +55,7 @@ Tool for ArcGIS to handle MIKE Urban databases. Functions:
 <p>Calculate full-running discharge of pipe using Colebrook-White.</p>
 <h2 id="Kontakt">Contact</h2>
 <p>E-mail: enielsen93@hotmail.com</p>
-<p>Tlf.: 60 64 52 04</p>
+<p>No.: 60 64 52 04</p>
 <p>8600 Silkeborg</p>
 <p><u><a href="http://www.linkedin.com/in/emil-nielsen-750025141"><b>LinkedIn</b></a></u></p>
 <p> </p>
