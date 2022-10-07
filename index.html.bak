@@ -32,14 +32,14 @@
 <p>The libraries can be found here:
 <p><u><a href="https://github.com/enielsen93"><b>GitHub libraries</b></a></u></p>
 <h2>Tools:</h2>
-<h3><a href="https://github.com/enielsen93/MIKE-Urban-Tools">MIKE Urban Tools</a></h3>
+<h3><a href="https://github.com/enielsen93/MIKE-Urban-Tools">MIKE Urban Tools</a><a href="https://github.com/enielsen93/MIKE-Urban-Tools/archive/refs/heads/main.zip"><img class="download" src="Images\download.png" height = 15></a></h3>
 Tool for ArcGIS to handle MIKE Urban databases. Functions:
 <ul>
 	<li>Show MIKE Urban databases in ArcGIS with proper labelling and display <a href="Videos\Display MIKE Urban Model.mp4"><img class="Video" src="Video_logo.png" height = 15></a></li>
 	<li>Calculate dimensions of pipes in MIKE Urban databases through Colebrook-White and the Time-area-method. <a href="Videos\Pipe Dimension Tool.mp4"><img class="Video" src="Video_logo.png" height = 15></a></li>
 	<li>Compare MIKE Urban databases. <a href="Videos\Compare MIKE Urban Model.mp4"><img class="Video" src="Video_logo.png" height = 15></a></li>
-	<li>Calculate Catchment Impervious Area. <a href="Videos\Catchment Area.mp4"><img class="Video" src="Video_logo.png" height = 15></a>
-	<li>Get Terrain Elevation from DHM. <a href="Videos\Catchment Area.mp4"><img class="Video" src="Video_logo.png" height = 15></a>
+	<li>Calculate Catchment Impervious Area. <a href="Videos\Catchment Area.mp4"><img class="Video" src="Video_logo.png" height = 15></a></li>
+	<li>Get Terrain Elevation from DHM. <a href="Videos\Get Terrain Elevation.mp4"><img class="Video" src="Video_logo.png" height = 15></a></li>
 	<li>Export MIKE Urban database to CAD.</li>
 	<li>Convert Dandasgraf database to MIKE Urban.</li>
 	<li>Create MIKE Urban Joblists using advanced parameters (including IDF statistics).</li>
