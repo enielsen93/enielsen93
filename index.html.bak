@@ -31,6 +31,7 @@
 <p>I've developed a range of tools for ArcGIS and Python, designed to handle various tasks within hydraulics in DHIs MIKE Urban and MIKE+</p>
 <p>The libraries can be found here:
 <p><u><a href="https://github.com/enielsen93"><b>GitHub libraries</b></a></u></p>
+Or listed below:
 <h2>Tools:</h2>
 <h3><a href="https://github.com/enielsen93/MIKE-Urban-Tools">MIKE Urban Tools</a> <a href="https://github.com/enielsen93/MIKE-Urban-Tools/archive/refs/heads/main.zip"><img class="download" src="Images\download.png" height = 15></a></h3>
 Tool for ArcGIS to handle MIKE Urban databases. Features:
@@ -45,6 +46,18 @@ Tool for ArcGIS to handle MIKE Urban databases. Features:
 	<li>Create MIKE Urban Joblists using advanced parameters (including IDF statistics).</li>
 	<li>And much more...</li>
 </ul>
+<h3><a href="https://github.com/enielsen93/Long-Term-Statistics">Long Term Statistics</a> <a href="https://github.com/enielsen93/Long-Term-Statistics/archive/refs/heads/main.zip"><img class="download" src="Images\download.png" height = 15></a></h3>
+ArcGIS Pro Toolbox for generating Long Term Statistics joblists from DMI KMD files or DFS0 files. Features:
+<ul>
+	<li>Select rain events based on accumulated rain depth</li>
+	<li>Select rain events based on IDF statistics</li>
+	<li>Begin or end the job earlier or later than rain event</li>
+	<li>Include hotstart file</li>
+	<li>Reduce time step for rain events with high intensity</li>
+</ul>
+
+<i>Requires Python Module <b><a href="https://github.com/enielsen93/rainreader">rainreader</a></b> installed in ArcGIS Pro's Python Environment.</i>
+
 <h3><a href="https://github.com/enielsen93/rainreader">rainreader</a></h3>
 <p>Read KMD files from The Danish Meterological Institute (DMI) as well as simple analysis of the rain gauge data. Features:</p>
 <ul>
@@ -52,14 +65,14 @@ Tool for ArcGIS to handle MIKE Urban databases. Features:
 	<li>Generate time series with custom initial loss.</li>
 	<li>Generate time series with custom concentration time.</li>
 	<li>Calculate accumulated rain fall per event.</li>
-	<li>Generate IDF (<b>I</b>ntensity, Duration, Frequency) curves.</li>
+	<li>Generate IDF (<b>I</b>ntensity, <b>D</b>uration, <b>F</b>requency) curves.</li>
 </ul>
 <h3><a href="https://github.com/enielsen93/networker">networker</a></h3>
 <p>Get FromNode and ToNode for MIKE Urban pipes without running Project Check Tool on database. </p>
 <h3><a href="https://github.com/enielsen93/mikegraph">mikegraph</a></h3>
 <p>Graph MIKE Urban database. Is also able to trace through network and calculate catchment areas etc.</p> 
 <h3><a href="https://github.com/enielsen93/rainreader">mousereader</a></h3>
-<p>Read MOUSE PRF Result Files in Python</p>
+<p>Read MOUSE PRF Result Files in Python.</p>
 <h3><a href="https://github.com/enielsen93/timearea">timearea</a></h3>
 <p>Analyze discharge through MIKE Urban pipe using time area function.</p>
 <h3><a href="https://github.com/enielsen93/ColebrookWhite">ColebrookWhite</a></h3>
