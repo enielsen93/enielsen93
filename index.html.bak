@@ -56,7 +56,7 @@ ArcGIS Pro Toolbox for generating Long Term Statistics joblists from DMI KMD fil
 	<li>Reduce time step for rain events with high intensity</li>
 </ul>
 
-<i>Requires Python Module <b><a href="https://github.com/enielsen93/rainreader">rainreader</a></b> installed in ArcGIS Pro's Python Environment.</i>
+<i>Requires Python Module <b><a href="https://github.com/enielsen93/rainreader">rainreader</a></b> installed in the Python Environment of ArcGIS Pro.</i>
 
 <h3><a href="https://github.com/enielsen93/rainreader">rainreader</a></h3>
 <p>Read KMD files from The Danish Meterological Institute (DMI) as well as simple analysis of the rain gauge data. Features:</p>
